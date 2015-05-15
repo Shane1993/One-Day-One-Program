@@ -7,9 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Fragment1.OnButtonClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,15 @@ public class MainActivity extends Activity {
             fragmentTransaction.add(R.id.container,new Fragment1());
             fragmentTransaction.commit();
         }
+
+        tv = (TextView) findViewById(R.id.atycountTv);
+
     }
 
+
+    TextView tv;
+    @Override
+    public void onButtonClick(int count) {
+        tv.setText(""+count);
+    }
 }

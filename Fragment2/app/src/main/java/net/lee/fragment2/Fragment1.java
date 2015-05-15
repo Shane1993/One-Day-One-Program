@@ -1,5 +1,6 @@
 package net.lee.fragment2;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,9 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
     Button button;
 
     private static int count = 0;
+
+    private OnButtonClickListener listener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,10 +39,35 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.fragmentBtn)
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof OnButtonClickListener)
         {
-            tv.setText(++count + "");
+            listener = (OnButtonClickListener) activity;
+        }else
+        {
+            throw new ClassCastException(activity.toString() + " must implement Fragment1.OnButtonClickListener");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        updateDetail();
+    }
+
+    public void updateDetail()
+    {
+        listener.onButtonClick(++count);
+    }
+
+    public interface OnButtonClickListener
+    {
+        public void onButtonClick(int count);
     }
 }

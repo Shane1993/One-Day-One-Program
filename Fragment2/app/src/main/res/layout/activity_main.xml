@@ -11,8 +11,11 @@
 
 
     <TextView
-        android:text="@string/hello_world"
+        android:id="@+id/atycountTv"
+        android:text="This is activity's count"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
