@@ -29,10 +29,9 @@ public class MainActivity extends Activity implements Fragment1.OnButtonClickLis
 
     }
 
-
     TextView tv;
     @Override
-    public void onButtonClick(int count) {
+    public void onSend(int count) {
         tv.setText(""+count);
     }
 }

@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by LEE on 2015/5/14.
  */
@@ -58,16 +56,19 @@ public class Fragment1 extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        updateDetail();
+//        updateDetail();
+        //Send the data by the interface
+        listener.onSend(++count);
+
     }
 
     public void updateDetail()
     {
-        listener.onButtonClick(++count);
+        listener.onSend(++count);
     }
 
     public interface OnButtonClickListener
     {
-        public void onButtonClick(int count);
+        public void onSend(int count);
     }
 }
