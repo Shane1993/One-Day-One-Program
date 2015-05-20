@@ -16,11 +16,31 @@
         android:layout_height="wrap_content"
         android:text="uploadFile" />
 
-    <Button
-        android:id="@+id/downloadFileBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="downloadFile" />
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/downloadFileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="downloadFile" />
+
+        <Button
+            android:id="@+id/saveFileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="saveFile" />
+
+        <Button
+            android:id="@+id/getFileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="getFileFromSDCard" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/loadThumbnailBtn"

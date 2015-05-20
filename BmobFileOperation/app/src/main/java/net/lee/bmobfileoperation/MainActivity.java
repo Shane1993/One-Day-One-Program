@@ -2,6 +2,7 @@ package net.lee.bmobfileoperation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.InputStream;
 
 import cn.bmob.v3.AsyncCustomEndpoints;
 import cn.bmob.v3.Bmob;
@@ -20,10 +24,13 @@ import cn.bmob.v3.listener.GetListener;
 public class MainActivity extends Activity {
 
     Button uploadBtn,downloadBtn,thumbnailBtn;
+    Button saveBtn,getFileBtn;
     ImageView iconImageView;
 
     //Bmob应用ID
     private String Bmob_AppId = "1b31c55348aeab1a15e5263e668fb88a";
+
+    String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,9 @@ public class MainActivity extends Activity {
         downloadBtn = (Button) findViewById(R.id.downloadFileBtn);
         thumbnailBtn = (Button) findViewById(R.id.loadThumbnailBtn);
         iconImageView = (ImageView) findViewById(R.id.iconImageView);
+
+        saveBtn = (Button) findViewById(R.id.saveFileBtn);
+        getFileBtn = (Button) findViewById(R.id.getFileBtn);
 
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +62,33 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 onRequestCloudCode("LZS");
+            }
+        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        FileUtils fileUtils = new FileUtils();
+                        System.out.println(fileUtils.downFile(url, "BmobFile", "LZSIcon.jpg"));
+                    }
+                };
+                new Thread(runnable).start();
+
+            }
+        });
+
+        getFileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FileUtils fileUtils = new FileUtils();
+                File file = fileUtils.getFile("BmobFile", "LZSIcon.jpg");
+                System.out.println("Name : " + file.getName() +"  ,Path:"+ file.getAbsolutePath());
+
+                iconImageView.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
             }
         });
 
@@ -107,7 +144,8 @@ public class MainActivity extends Activity {
                                         //获取到BmobFile
                                         BmobFile icon = testModel.getIcon();
 //                                        //获取Url
-//                                        String url = icon.getFileUrl(MainActivity.this);
+                                        url = icon.getFileUrl(MainActivity.this);
+                                        System.out.println("url------>" + url);
                                         //将图片加载到指定的ImageView
                                         icon.loadImage(MainActivity.this, iconImageView);
                                     }
