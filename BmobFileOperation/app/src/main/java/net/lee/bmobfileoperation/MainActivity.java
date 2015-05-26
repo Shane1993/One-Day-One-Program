@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
 
     private void onRequestCloudCode(String name) {
 
-        // cloudCodeName对应你刚刚创建的云端代码名称
+        // cloudCodeName对应你刚刚创建的云端代码名称e
         String cloudCodeName = "testFile";
         JSONObject params = new JSONObject();
         try {
