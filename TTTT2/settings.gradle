@@ -1,0 +1,3 @@
+include ':app', ':libraries:SlidingMenu', ':libraries:ActionBarSherlock'
+//project(':SlidingMenu').projectDir = new File('libraries/SlidingMenu')
+//project(':ActionBarSherlock').projectDir = new File('libraries/ActionBarSherlock')
